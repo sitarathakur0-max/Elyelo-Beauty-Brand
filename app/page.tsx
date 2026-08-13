@@ -1,69 +1,92 @@
-import Image from "next/image";
+import {
+  HeroSection,
+  ShopByCategory,
+  BestSellers,
+  WhyElyelo,
+  FeaturedCollection,
+  ShopByConcern,
+  CustomerReviews,
+  BeautyJournal,
+} from '@/components/home'
+import { Newsletter } from '@/components/global/Newsletter'
+import { getBestSellers } from '@/services/productservice'
 
-export default function Home() {
+// ✅ Demo reviews (will be replaced with API later)
+const demoReviews = [
+  {
+    id: '1',
+    name: 'Sarah Ahmed',
+    rating: 5,
+    text: 'Elyelo has completely transformed my skincare routine. The products are carefully curated and the quality is exceptional.',
+    date: 'January 2026',
+  },
+  {
+    id: '2',
+    name: 'Zara Khan',
+    rating: 5,
+    text: 'Finally a beauty store in Pakistan that offers genuine products with clear information. The shipping was fast and everything arrived beautifully packaged.',
+    date: 'February 2026',
+  },
+  {
+    id: '3',
+    name: 'Ayesha Malik',
+    rating: 4,
+    text: 'Great selection of international brands. The customer service team was helpful and guided me to choose the right products for my sensitive skin.',
+    date: 'March 2026',
+  },
+]
+
+// app/page.tsx
+
+const demoBlogPosts = [
+  {
+    id: '1',
+    title: 'How to Build a Simple Skincare Routine',
+    excerpt: 'Discover a straightforward skincare routine tailored to your skin type...',
+    slug: 'simple-skincare-routine',
+    image: '/images/products/skincare/ordinary.jpg',          // ✅ Existing image
+    date: 'March 15, 2026',
+  },
+  {
+    id: '2',
+    title: 'How to Choose the Right Serum for Your Skin',
+    excerpt: 'Not all serums are created equal. Learn how to select the right serum...',
+    slug: 'choose-right-serum',
+    image: '/images/products/skincare/cerave sunscreen.webp', // ✅ Existing image
+    date: 'March 10, 2026',
+  },
+  {
+    id: '3',
+    title: 'Niacinamide: Benefits and How to Use It',
+    excerpt: 'Discover the science behind niacinamide, its benefits for your skin...',
+    slug: 'niacinamide-benefits',
+    image: '/images/products/skincare/dermive.jpg',           // ✅ Existing image
+    date: 'March 5, 2026',
+  },
+  {
+    id: '4',
+    title: 'A Beginner\'s Guide to Skincare Ingredients',
+    excerpt: 'Understand the key ingredients in your skincare products...',
+    slug: 'skincare-ingredients-guide',
+    image: '/images/products/skincare/rivaj face wash.jpg',   // ✅ Existing image
+    date: 'February 28, 2026',
+  },
+]
+
+export default async function Home() {
+  const bestSellers = await getBestSellers()
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <>
+      <HeroSection />
+      <ShopByCategory />
+      <BestSellers products={bestSellers} />
+      <WhyElyelo />
+      <FeaturedCollection />
+      <ShopByConcern />
+      <CustomerReviews reviews={demoReviews} />
+      <BeautyJournal posts={demoBlogPosts} />
+      <Newsletter />
+    </>
+  )
 }

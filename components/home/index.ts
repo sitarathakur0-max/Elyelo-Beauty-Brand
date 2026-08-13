@@ -1,0 +1,8 @@
+export { default as HeroSection } from './HeroSection'
+export { default as ShopByCategory } from './ShopByCategory'
+export { default as BestSellers } from './BestSellers'
+export { default as WhyElyelo } from './WhyElyelo'
+export { default as FeaturedCollection } from './FeaturedCollection'
+export { default as ShopByConcern } from './ShopByConcern'
+export { default as CustomerReviews } from './CustomerReviews'
+export { default as BeautyJournal } from './BeautyJournal'
