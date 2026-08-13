@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                 <span>Total</span>
                 <span>Rs. 2,499</span>
               </div>
-              <Button onClick={(e: any) => handleSubmit(e)} variant="gold" className="w-full">
+              <Button onClick={() => handleSubmit()} variant="gold" className="w-full">
                 Place Order
               </Button>
             </div>
